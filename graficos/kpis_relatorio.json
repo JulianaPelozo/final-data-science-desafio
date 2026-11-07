@@ -1,0 +1,50 @@
+[
+    {
+        "nome_kpi": "Taxa de Atividade do Microfone",
+        "objetivo": "Medir a proporção de sessões monitoradas em que o microfone da Smart TV (ou seus periféricos) esteve ativo para captação de som ambiental.",
+        "formula": "(Contagem de registros com estado_microfone == 'Ativo' / Total de registros tratados na base) * 100",
+        "resultado": 38.66,
+        "unidade": "%",
+        "universo": "882 janelas (100% da base tratada). Período: 01/09/2026 a 10/10/2026.",
+        "interpretacao": "Quase 4 em cada 10 janelas de captura registraram atividade do microfone. Como o status 'ativo' atesta que o hardware ligou em algum momento daquela janela de tempo (e não necessariamente os 10 minutos ininterruptos), isso indica uma alta frequência de acionamento do sensor, exigindo auditoria técnica sobre o que engatilha essa escuta com tanta recorrência."
+    },
+    {
+        "nome_kpi": "Tráfego Mediano por Modo de Privacidade",
+        "objetivo": "Avaliar se a ativação da interface de 'Modo de Privacidade' na TV reduz efetivamente o volume de metadados transmitidos.",
+        "formula": "Mediana do trafego_saida_kb agrupado pela configuração (Ativado vs Desativado).",
+        "resultado": {
+            "Ativado": 22.54,
+            "Desativado": 24.52
+        },
+        "unidade": "KB (Kilobytes)",
+        "universo": "859 registros com tráfego válido não-corrompido. Período: 01/09/2026 a 10/10/2026.",
+        "interpretacao": "O tráfego de saída mediano é estatisticamente idêntico entre os aparelhos com a privacidade ativada (22,54 KB) e desativada (24,52 KB). Isso prova que, no fluxo diário ordinário de uso, habilitar a função de privacidade não inibe nem sufoca a telemetria arquitetural da TV, operando como um controle mais aparente do que efetivo."
+    },
+    {
+        "nome_kpi": "Concentração de Audiência (Top 3)",
+        "objetivo": "Identificar o grau de concentração do tempo de tela e interesse dos usuários nas categorias líderes.",
+        "formula": "Soma da frequência relativa (percentual) das 3 categorias mais recorrentes da base.",
+        "resultado": 60.66,
+        "unidade": "%",
+        "universo": "882 registros válidos (linhas sem categoria foram contabilizadas como 'Outros' para não distorcer o denominador). Período: 01/09/2026 a 10/10/2026.",
+        "interpretacao": "A audiência é massivamente concentrada, com mais de 60% de todas as sessões capturadas focadas estritamente em Filmes, Séries e Esportes. Esse padrão de consumo contínuo e de longa duração serve de espinha dorsal para os envios da telemetria ACR (Automatic Content Recognition), já que esses formatos costumam prender o usuário na tela de forma contínua."
+    },
+    {
+        "nome_kpi": "Taxa de Interação com Anúncios (CTR Global)",
+        "objetivo": "Medir a eficácia das exibições publicitárias por meio do volume real de cliques/interações do usuário.",
+        "formula": "(Soma de todas as interacoes_anuncios / Soma de todos os anuncios_exibidos nas linhas limpas) * 100",
+        "resultado": 14.12,
+        "unidade": "%",
+        "universo": "871 janelas (linhas filtradas onde ambos os campos de exibição e interação possuem métricas íntegras). Período: 01/09/2026 a 10/10/2026.",
+        "interpretacao": "A taxa de 14,12% demonstra que as interações com anúncios são pontuais e dispersas em um mar de exibições sem resposta (comprovado pela mediana global zero das interações). Em um aparelho estático como a Smart TV, esse percentual é razoável, mas sugere que há exibição massiva de campanhas para públicos não-nichados, diluindo o rendimento."
+    },
+    {
+        "nome_kpi": "Registros com Possível Inconsistência de Consentimento",
+        "objetivo": "Sinalizar janelas prioritárias para auditoria jurídica onde a telemetria comercial continuou operando apesar da recusa do usuário.",
+        "formula": "(Contagem de registros com consentimento_coleta == 'Nao' E categoria_telemetria pertencente a ['Publicidade', 'ACR/conteudo']) / Total de registros onde o consentimento_coleta == 'Nao'.",
+        "resultado": 42.8,
+        "unidade": "%",
+        "universo": "250 registros críticos (o universo exclusivo de janelas em que o usuário informou explicitamente 'Nao' à coleta). Período: 01/09/2026 a 10/10/2026.",
+        "interpretacao": "Este é o achado mais severo de conformidade da base: 42,80% (107 sessões) de todo o tráfego gerado por usuários que recusaram explicitamente o monitoramento (opt-out) continuaram despachando cargas ativas classificadas como 'Publicidade' ou rastreamento via 'ACR/conteúdo'. Matematicamente, a opção de recusa pela interface ignorou a camada técnica do sistema quase metade das vezes."
+    }
+]
